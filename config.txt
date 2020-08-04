@@ -1,0 +1,15 @@
+Stella (A2600),/media/data/local/home/.stella/state
+FBA,/media/data/local/home/.fba/saves
+FCEUX (NES),/media/data/local/home/.fceux/fcs
+Gambatte (GB/GBC),/media/data/local/home/.gambatte/saves
+ReGBA (GBA),/media/data/local/home/.gpsp
+SMS Plus (GG/SMS),/media/data/local/home/.smsplus/state
+Genesis Plus (GG/SMS/MD)/media/data/local/home/.genplus/saves
+PicoDrive (MD),/media/data/local/home/.picodrive/mds
+Handy (Lynx),/media/data/local/home/.handy
+NGPCEmu (NGP),/media/data/local/home/.ngpcemu/sstates
+Temper (PCE),/media/data/local/home/.temper/save_states
+PCSX4All (PS),/media/data/local/home/.pcsx4all/sstates,/media/data/local/home/.pcsx4all/memcards
+PocketSNES (SNES),/media/data/local/home/.pocketsnes
+SwanEmu (WS),/media/data/local/home/.swanemu/sstates
+xMAME (Arcade),/media/data/local/share/xmame/xmame52/sta,/media/data/local/share/xmame/xmame69/sta,/media/data/local/share/xmame/xmame84/sta
