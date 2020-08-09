@@ -10,7 +10,7 @@ import keys, app
 BACKGROUND_COLOR = (255,153,51)
 SCREEN_W = 320
 SCREEN_H = 240
-FPS = 3
+FPS = 15
 LOG = "/media/data/local/home/.pystatesbackup/log.txt"
 
 
