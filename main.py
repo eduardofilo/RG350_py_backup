@@ -7,7 +7,6 @@ import keys, app
 
 
 # Constants
-BACKGROUND_COLOR = (255,153,51)
 SCREEN_W = 320
 SCREEN_H = 240
 FPS = 15
@@ -18,13 +17,17 @@ LOG = "/media/data/local/home/.pystatesbackup/log.txt"
 logging.basicConfig(level=logging.DEBUG, filename=LOG, filemode="a+", format="%(asctime)-15s %(levelname)-8s %(message)s")
 successes, failures = pygame.init()
 logging.debug("{0} successes and {1} failures".format(successes, failures))
+pygame.font.init()
+textFont = pygame.font.Font('resources/pixelberry.ttf', 8)
 
 clock = pygame.time.Clock()
 pygame.mouse.set_visible(False)
 realScreen = pygame.display.set_mode((SCREEN_W,SCREEN_H), HWSURFACE, 16)
 screen = pygame.Surface((SCREEN_W,SCREEN_H))
 
-states = app.States(screen)
+the_app = app.App(screen, textFont)
+header = app.Header(screen, textFont)
+states = app.States(screen, textFont)
 
 
 # Main loop
@@ -36,9 +39,14 @@ while running:
     for event in events:
         if event.type == pygame.QUIT:
             running = False
+        if event.type == pygame.KEYUP:
+            if event.key == keys.RG350_BUTTON_START:
+                running = False
 
-    if not states.handleEvents(events):
-        running = False
+    the_app.handle_events(events)
+
+    the_app.render()
+    header.render()
     states.render()
 
     realScreen.blit(screen, (0,0))
