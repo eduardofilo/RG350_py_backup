@@ -21,17 +21,19 @@ logging.basicConfig(level=logging.DEBUG, filename=LOG, filemode="a+", format="%(
 successes, failures = pygame.init()
 logging.debug("{0} successes and {1} failures".format(successes, failures))
 pygame.font.init()
-textFont = pygame.font.Font('resources/pixelberry.ttf', 8)
 
 clock = pygame.time.Clock()
 pygame.mouse.set_visible(False)
 realScreen = pygame.display.set_mode((SCREEN_W,SCREEN_H), HWSURFACE, 16)
 screen = pygame.Surface((SCREEN_W,SCREEN_H))
+font = pygame.font.Font('resources/pixelberry.ttf', 8)
 
-the_app = app.App(screen, textFont)
-header = app.Header(screen, textFont)
-states = app.States(screen, textFont)
-footer = app.Footer(screen, textFont)
+draw_tools = {'screen': screen, 'font': font}
+
+the_app = app.App(draw_tools)
+header = app.Header(draw_tools)
+states = app.States(draw_tools)
+footer = app.Footer(draw_tools)
 
 
 # Main loop
