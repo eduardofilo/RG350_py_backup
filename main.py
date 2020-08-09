@@ -10,7 +10,10 @@ import keys, app
 SCREEN_W = 320
 SCREEN_H = 240
 FPS = 15
-LOG = "/media/data/local/home/.pystatesbackup/log.txt"
+if len(sys.argv) > 1 and sys.argv[1]=='debug':
+    LOG = "/home/edumoreno/git/rg350_pystatesbackup/log.txt"
+else:
+    LOG = "/media/data/local/home/.pystatesbackup/log.txt"
 
 
 # Initialization
@@ -28,6 +31,7 @@ screen = pygame.Surface((SCREEN_W,SCREEN_H))
 the_app = app.App(screen, textFont)
 header = app.Header(screen, textFont)
 states = app.States(screen, textFont)
+footer = app.Footer(screen, textFont)
 
 
 # Main loop
@@ -48,6 +52,7 @@ while running:
     the_app.render()
     header.render()
     states.render()
+    footer.render()
 
     realScreen.blit(screen, (0,0))
     pygame.display.flip()
