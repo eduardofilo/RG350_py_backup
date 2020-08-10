@@ -24,9 +24,11 @@ config.init()
 dt = 1 / settings.FPS * 1000     # dt is the time since last frame.
 running = True
 while running:
+    dirty = False
     # Event management
     events = pygame.event.get()
     for event in events:
+        dirty = True
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYUP:
@@ -35,13 +37,14 @@ while running:
 
     app.handle_events(events)
 
-    app.render()
-    header.render()
-    states.render()
-    footer.render()
-
-    realScreen.blit(settings.screen, (0,0))
-    pygame.display.flip()
+    if dirty:
+        app.render()
+        header.render()
+        states.render()
+        footer.render()
+        realScreen.blit(settings.screen, (0,0))
+        pygame.display.flip()
+        
     dt = clock.tick(settings.FPS)
 
 pygame.quit()
