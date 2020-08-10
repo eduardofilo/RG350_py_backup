@@ -1,7 +1,8 @@
 import pygame
+from pygame.locals import *
 import logging  #logging.debug(string)
 import keys
-from random import *
+
 
 class App():
     def __init__(self, draw_tools):
@@ -20,11 +21,28 @@ class App():
 
 
 class States():
+    TEXT_COLOR = (248, 252, 248)
+    BACK_COLOR = (104, 40, 128)
+
     def __init__(self, draw_tools):
         self.draw_tools = draw_tools
 
+    def draw_check(self, surface, pos=(0,0), status=False):
+        pygame.draw.lines(surface, self.TEXT_COLOR, False, [(pos[0], pos[1]), (pos[0], pos[1]+8), (pos[0]+8, pos[1]+8), (pos[0]+8, pos[1]), (pos[0], pos[1])])
+        if status:
+            pygame.draw.line(surface, self.TEXT_COLOR, (pos[0], pos[1]), (pos[0]+8, pos[1]+8))
+            pygame.draw.line(surface, self.TEXT_COLOR, (pos[0]+8, pos[1]), (pos[0], pos[1]+8))
+
     def render(self):
-        pass
+        pane = pygame.Surface((288,180), SRCALPHA)
+        pygame.draw.rect(pane, self.BACK_COLOR, (0, 0, 288, 13))
+        self.draw_check(pane, (5, 2), True)
+        textsurface = self.draw_tools['font'].render('Stella (A2600)', False, self.TEXT_COLOR)
+        pane.blit(textsurface,(5+12,1))
+        self.draw_check(pane, (5, 2+13), False)
+        textsurface = self.draw_tools['font'].render('FBA', False, self.TEXT_COLOR)
+        pane.blit(textsurface,(5+12,1+13))
+        self.draw_tools['screen'].blit(pane, (16, 26))
 
 
 class Header():
@@ -51,7 +69,20 @@ class Footer():
         self.draw_tools = draw_tools
 
     def render(self):
+        # Background
         pygame.draw.rect(self.draw_tools['screen'], self.BACK_COLOR, (0, 225, 320, 15))
+
+        # Select
+        textsurface = self.draw_tools['font'].render('select', False, self.TEXT_COLOR)
+        x = 6
+        y = 227
+        up_icon  = pygame.image.load('resources/UP_button.png').convert_alpha()
+        self.draw_tools['screen'].blit(up_icon, (x, y))
+        down_icon  = pygame.image.load('resources/DOWN_button.png').convert_alpha()
+        self.draw_tools['screen'].blit(down_icon, (x+10, y))
+        self.draw_tools['screen'].blit(textsurface,(x+25,y))
+
+        # Exit
         textsurface = self.draw_tools['font'].render('exit', False, self.TEXT_COLOR)
         x = 320-10-textsurface.get_width()-15
         y = 227

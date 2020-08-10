@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
+import os
 import pygame
 from pygame.locals import *
 import logging
-import keys, app
+import keys, app, config
 
 
 # Constants
@@ -11,9 +12,15 @@ SCREEN_W = 320
 SCREEN_H = 240
 FPS = 15
 if len(sys.argv) > 1 and sys.argv[1]=='debug':
-    LOG = "/home/edumoreno/git/rg350_pystatesbackup/log.txt"
+    HOME = "/home/edumoreno/git/rg350_pystatesbackup"
 else:
-    LOG = "/media/data/local/home/.pystatesbackup/log.txt"
+    HOME = "/media/data/local/home/.pystatesbackup"
+if not os.path.exists(HOME):
+    os.makedirs(HOME)
+LOG = HOME + "/log.txt"
+CONFIG = HOME + "/config.txt"
+if not os.path.exists(CONFIG):
+    os.system('cp config.txt ' + CONFIG)
 
 
 # Initialization
@@ -34,7 +41,7 @@ the_app = app.App(draw_tools)
 header = app.Header(draw_tools)
 states = app.States(draw_tools)
 footer = app.Footer(draw_tools)
-
+the_config = config.Config(CONFIG)
 
 # Main loop
 dt = 1 / FPS * 1000     # dt is the time since last frame.
