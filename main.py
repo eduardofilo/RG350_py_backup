@@ -1,50 +1,30 @@
 # -*- coding: utf-8 -*-
+import settings, app, header, states, footer, keys
 import sys
-import os
+import logging
 import pygame
 from pygame.locals import *
-import logging
-import keys, app, config
 
 
-# Constants
-SCREEN_W = 320
-SCREEN_H = 240
-FPS = 15
-if len(sys.argv) > 1 and sys.argv[1]=='debug':
-    HOME = "/home/edumoreno/git/rg350_pystatesbackup"
-else:
-    HOME = "/media/data/local/home/.pystatesbackup"
-if not os.path.exists(HOME):
-    os.makedirs(HOME)
-LOG = HOME + "/log.txt"
-CONFIG = HOME + "/config.txt"
-if not os.path.exists(CONFIG):
-    os.system('cp config.txt ' + CONFIG)
+settings.init()
 
 
 # Initialization
-logging.basicConfig(level=logging.DEBUG, filename=LOG, filemode="a+", format="%(asctime)-15s %(levelname)-8s %(message)s")
 successes, failures = pygame.init()
 logging.debug("{0} successes and {1} failures".format(successes, failures))
 pygame.font.init()
 
 clock = pygame.time.Clock()
 pygame.mouse.set_visible(False)
-realScreen = pygame.display.set_mode((SCREEN_W,SCREEN_H), HWSURFACE, 16)
-screen = pygame.Surface((SCREEN_W,SCREEN_H))
+realScreen = pygame.display.set_mode((settings.SCREEN_W,settings.SCREEN_H), HWSURFACE, 16)
+screen = pygame.Surface((settings.SCREEN_W,settings.SCREEN_H))
 font = pygame.font.Font('resources/pixelberry.ttf', 8)
 
-draw_tools = {'screen': screen, 'font': font}
-the_config = config.Config(CONFIG)
-
-the_app = app.App(draw_tools)
-header = app.Header(draw_tools)
-states = app.States(draw_tools, the_config)
-footer = app.Footer(draw_tools)
+settings.screen = screen
+settings.font = font
 
 # Main loop
-dt = 1 / FPS * 1000     # dt is the time since last frame.
+dt = 1 / settings.FPS * 1000     # dt is the time since last frame.
 running = True
 while running:
     # Event management
@@ -56,16 +36,16 @@ while running:
             if event.key == keys.RG350_BUTTON_START:
                 running = False
 
-    the_app.handle_events(events)
+    app.handle_events(events)
 
-    the_app.render()
+    app.render()
     header.render()
     states.render()
     footer.render()
 
     realScreen.blit(screen, (0,0))
     pygame.display.flip()
-    dt = clock.tick(FPS)
+    dt = clock.tick(settings.FPS)
 
 pygame.quit()
 sys.exit()
