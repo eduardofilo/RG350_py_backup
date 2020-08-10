@@ -16,20 +16,20 @@ selected = 0
 screen = None
 font = None
 debug = len(sys.argv) > 1 and sys.argv[1]=='debug'
+if debug:
+    HOME = "/home/edumoreno/git/rg350_pystatesbackup"
+    CONFIG = HOME + "/config_debug.txt"
+else:
+    HOME = "/media/data/local/home/.pystatesbackup"
+    CONFIG = HOME + "/config.txt"
+    if not os.path.exists(HOME):
+        os.makedirs(HOME)
+    if not os.path.exists(CONFIG):
+        os.system('cp config.txt ' + CONFIG)
+LOG = HOME + "/log.txt"
 
 def init():
     global config
-    if debug:
-        HOME = "/home/edumoreno/git/rg350_pystatesbackup"
-        CONFIG = HOME + "/config_debug.txt"
-    else:
-        HOME = "/media/data/local/home/.pystatesbackup"
-        CONFIG = HOME + "/config.txt"
-        if not os.path.exists(HOME):
-            os.makedirs(HOME)
-        if not os.path.exists(CONFIG):
-            os.system('cp config.txt ' + CONFIG)
-    LOG = HOME + "/log.txt"
 
     logging.basicConfig(level=logging.DEBUG, filename=LOG, filemode="a+", format="%(asctime)-15s %(levelname)-8s %(message)s")
 

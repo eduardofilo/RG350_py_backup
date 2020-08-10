@@ -5,6 +5,7 @@ from pygame.locals import *
 import math
 
 TEXT_COLOR = (248, 252, 248)
+TEXT_COLOR_ERROR = (255,65,65)
 BACK_COLOR = (154, 90, 178)
 SYSTEMS_WIDTH = 288
 SYSTEMS_HEIGHT = 195
@@ -20,13 +21,20 @@ def draw_check(surface, pos=(0,0), status=False):
 def render():
     pane = pygame.Surface((SYSTEMS_WIDTH, SYSTEM_HEIGHT*N_SYSTEMS_FIT), SRCALPHA)
 
-    pygame.draw.rect(pane, BACK_COLOR, (0, 0+settings.selected*SYSTEM_HEIGHT, SYSTEMS_WIDTH, SYSTEM_HEIGHT))
-
-    n = 0
-    for system in settings.config:
-        draw_check(pane, (5, 2+n*SYSTEM_HEIGHT), system['enabled'])
-        textsurface = settings.font.render(system['name'], False, TEXT_COLOR)
-        pane.blit(textsurface, (5+12, 1+n*SYSTEM_HEIGHT))
-        n = n + 1
+    if len(settings.config) > 0:
+        pygame.draw.rect(pane, BACK_COLOR, (0, 0+settings.selected*SYSTEM_HEIGHT, SYSTEMS_WIDTH, SYSTEM_HEIGHT))
+        n = 0
+        for system in settings.config:
+            draw_check(pane, (5, 2+n*SYSTEM_HEIGHT), system['enabled'])
+            textsurface = settings.font.render(system['name'], False, TEXT_COLOR)
+            pane.blit(textsurface, (5+12, 1+n*SYSTEM_HEIGHT))
+            n = n + 1
+    else:
+        textsurface = settings.font.render("Bad configuration file or states directories not found", False, TEXT_COLOR_ERROR)
+        pane.blit(textsurface, (5, 1))
+        textsurface = settings.font.render("in system. Review log file at:", False, TEXT_COLOR_ERROR)
+        pane.blit(textsurface, (5, 1+SYSTEM_HEIGHT))
+        textsurface = settings.font.render(settings.LOG, False, TEXT_COLOR_ERROR)
+        pane.blit(textsurface, (5, 1+2*SYSTEM_HEIGHT))
 
     settings.screen.blit(pane, (16, 26))

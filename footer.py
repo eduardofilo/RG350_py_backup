@@ -9,23 +9,24 @@ def render():
     # Background
     pygame.draw.rect(settings.screen, BACK_COLOR, (0, 225, 320, 15))
 
-    # Select
-    textsurface = settings.font.render('select', False, TEXT_COLOR)
-    x = 6
-    y = 227
-    up_icon  = pygame.image.load('resources/UP_button.png').convert_alpha()
-    settings.screen.blit(up_icon, (x, y))
-    down_icon  = pygame.image.load('resources/DOWN_button.png').convert_alpha()
-    settings.screen.blit(down_icon, (x+10, y))
-    settings.screen.blit(textsurface,(x+25,y))
+    if len(settings.config) > 0:
+        # Select
+        textsurface = settings.font.render('select', False, TEXT_COLOR)
+        x = 6
+        y = 227
+        up_icon  = pygame.image.load('resources/UP_button.png').convert_alpha()
+        settings.screen.blit(up_icon, (x, y))
+        down_icon  = pygame.image.load('resources/DOWN_button.png').convert_alpha()
+        settings.screen.blit(down_icon, (x+10, y))
+        settings.screen.blit(textsurface,(x+25,y))
 
-    # Toggle
-    textsurface = settings.font.render('toggle', False, TEXT_COLOR)
-    x = 70
-    y = 227
-    a_icon  = pygame.image.load('resources/A_button.png').convert_alpha()
-    settings.screen.blit(a_icon, (x, y))
-    settings.screen.blit(textsurface,(x+15,y))
+        # Toggle
+        textsurface = settings.font.render('toggle', False, TEXT_COLOR)
+        x = 70
+        y = 227
+        a_icon  = pygame.image.load('resources/A_button.png').convert_alpha()
+        settings.screen.blit(a_icon, (x, y))
+        settings.screen.blit(textsurface,(x+15,y))
 
     # Exit
     textsurface = settings.font.render('exit', False, TEXT_COLOR)
