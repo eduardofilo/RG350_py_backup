@@ -11,27 +11,35 @@ def render():
 
     if len(settings.config) > 0:
         # Select
-        textsurface = settings.font.render('select', False, TEXT_COLOR)
         x = 6
         y = 227
         up_icon  = pygame.image.load('resources/UP_button.png').convert_alpha()
         settings.screen.blit(up_icon, (x, y))
+
+        x = x + up_icon.get_width()
         down_icon  = pygame.image.load('resources/DOWN_button.png').convert_alpha()
-        settings.screen.blit(down_icon, (x+10, y))
-        settings.screen.blit(textsurface,(x+25,y))
+        settings.screen.blit(down_icon, (x, y))
+
+        x = x + down_icon.get_width() + 5
+        textsurface = settings.font.render('select', False, TEXT_COLOR)
+        settings.screen.blit(textsurface,(x,y))
 
         # Toggle
-        textsurface = settings.font.render('toggle', False, TEXT_COLOR)
-        x = 70
-        y = 227
+        x = x + textsurface.get_width() + 15
         a_icon  = pygame.image.load('resources/A_button.png').convert_alpha()
         settings.screen.blit(a_icon, (x, y))
-        settings.screen.blit(textsurface,(x+15,y))
+
+        x = x + a_icon.get_width() + 5
+        textsurface = settings.font.render('toggle', False, TEXT_COLOR)
+        settings.screen.blit(textsurface,(x,y))
 
     # Exit
-    textsurface = settings.font.render('exit', False, TEXT_COLOR)
-    x = 320-10-textsurface.get_width()-15
-    y = 227
     start_icon  = pygame.image.load('resources/START_button.png').convert_alpha()
+    textsurface = settings.font.render('exit', False, TEXT_COLOR)
+    
+    x = 320 - start_icon.get_width() - textsurface.get_width() - 5 - 10
+    y = 227
     settings.screen.blit(start_icon, (x, y))
-    settings.screen.blit(textsurface,(x+15,y))
+
+    x = x + start_icon.get_width() + 5
+    settings.screen.blit(textsurface,(x,y))
