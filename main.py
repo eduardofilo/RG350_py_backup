@@ -6,10 +6,8 @@ import pygame
 from pygame.locals import *
 
 
-settings.init()
-
-
 # Initialization
+settings.init()
 successes, failures = pygame.init()
 logging.debug("{0} successes and {1} failures".format(successes, failures))
 pygame.font.init()
@@ -17,11 +15,9 @@ pygame.font.init()
 clock = pygame.time.Clock()
 pygame.mouse.set_visible(False)
 realScreen = pygame.display.set_mode((settings.SCREEN_W,settings.SCREEN_H), HWSURFACE, 16)
-screen = pygame.Surface((settings.SCREEN_W,settings.SCREEN_H))
-font = pygame.font.Font('resources/pixelberry.ttf', 8)
+settings.screen = pygame.Surface((settings.SCREEN_W,settings.SCREEN_H))
+settings.font = pygame.font.Font('resources/pixelberry.ttf', 8)
 
-settings.screen = screen
-settings.font = font
 
 # Main loop
 dt = 1 / settings.FPS * 1000     # dt is the time since last frame.
@@ -43,7 +39,7 @@ while running:
     states.render()
     footer.render()
 
-    realScreen.blit(screen, (0,0))
+    realScreen.blit(settings.screen, (0,0))
     pygame.display.flip()
     dt = clock.tick(settings.FPS)
 
