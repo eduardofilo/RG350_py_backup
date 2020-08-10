@@ -14,9 +14,10 @@ config = []
 selected = 0
 screen = None
 font = None
+debug = len(sys.argv) > 1 and sys.argv[1]=='debug'
 
 def init():
-    if len(sys.argv) > 1 and sys.argv[1]=='debug':
+    if debug:
         HOME = "/home/edumoreno/git/rg350_pystatesbackup"
     else:
         HOME = "/media/data/local/home/.pystatesbackup"

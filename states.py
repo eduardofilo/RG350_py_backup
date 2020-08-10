@@ -4,7 +4,7 @@ from pygame.locals import *
 import math
 
 TEXT_COLOR = (248, 252, 248)
-BACK_COLOR = (104, 40, 128)
+BACK_COLOR = (154, 90, 178)
 SYSTEMS_WIDTH = 288
 SYSTEMS_HEIGHT = 195
 SYSTEM_HEIGHT = 13
