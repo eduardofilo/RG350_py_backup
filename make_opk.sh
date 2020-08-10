@@ -20,6 +20,7 @@ EOF
 # create opk
 FLIST="config.txt"
 FLIST="${FLIST} app.py"
+FLIST="${FLIST} config.py"
 FLIST="${FLIST} footer.py"
 FLIST="${FLIST} header.py"
 FLIST="${FLIST} keys.py"
