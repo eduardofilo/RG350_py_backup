@@ -9,13 +9,12 @@ SCREEN_H = 240
 FPS = 15
 SEPARATOR = ','
 
+# Vars
+config = []
+screen = None
+font = None
+
 def init():
-    global config
-    global screen
-    global font
-
-    config = []
-
     if len(sys.argv) > 1 and sys.argv[1]=='debug':
         HOME = "/home/edumoreno/git/rg350_pystatesbackup"
     else:
