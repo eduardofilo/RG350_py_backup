@@ -14,4 +14,4 @@ def render():
     settings.screen.blit(textsurface,(10,3))
     if len(settings.config) > 0:
         textsurface = settings.font.render(str(settings.selected+1) + "/" + str(len(settings.config)), False, TEXT_COLOR)
-        settings.screen.blit(textsurface,(320-15-textsurface.get_width(),3))
+        settings.screen.blit(textsurface, (320 - textsurface.get_width() - 10, 3))
