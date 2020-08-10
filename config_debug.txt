@@ -1,0 +1,2 @@
+Releases,True,/home/edumoreno/git/rg350_pystatesbackup/releases
+Resources,False,/home/edumoreno/git/rg350_pystatesbackup/resources

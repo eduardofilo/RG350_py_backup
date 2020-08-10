@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pygame
 
 # Complete list of pygame key codes at http://www.poketcode.com/es/pygame/teclado/index.html
