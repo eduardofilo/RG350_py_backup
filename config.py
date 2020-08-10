@@ -10,7 +10,7 @@ class Config():
             file  = open(config_file, 'r')
             for line in file:
                 items = line[:-1].split(self.SEPARATOR)
-                system = {'name': items[0], 'enabled': items[1], 'dirs': []}
+                system = {'name': items[0], 'enabled': items[1] == 'True', 'dirs': []}
                 for i in range(2,len(items)):
                     system['dirs'].append(items[i])
                 self.config.append(system)

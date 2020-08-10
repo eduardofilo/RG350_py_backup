@@ -36,12 +36,12 @@ screen = pygame.Surface((SCREEN_W,SCREEN_H))
 font = pygame.font.Font('resources/pixelberry.ttf', 8)
 
 draw_tools = {'screen': screen, 'font': font}
+the_config = config.Config(CONFIG)
 
 the_app = app.App(draw_tools)
 header = app.Header(draw_tools)
-states = app.States(draw_tools)
+states = app.States(draw_tools, the_config)
 footer = app.Footer(draw_tools)
-the_config = config.Config(CONFIG)
 
 # Main loop
 dt = 1 / FPS * 1000     # dt is the time since last frame.

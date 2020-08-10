@@ -24,8 +24,9 @@ class States():
     TEXT_COLOR = (248, 252, 248)
     BACK_COLOR = (104, 40, 128)
 
-    def __init__(self, draw_tools):
+    def __init__(self, draw_tools, the_config):
         self.draw_tools = draw_tools
+        self.the_config = the_config
 
     def draw_check(self, surface, pos=(0,0), status=False):
         pygame.draw.lines(surface, self.TEXT_COLOR, False, [(pos[0], pos[1]), (pos[0], pos[1]+8), (pos[0]+8, pos[1]+8), (pos[0]+8, pos[1]), (pos[0], pos[1])])
@@ -34,14 +35,17 @@ class States():
             pygame.draw.line(surface, self.TEXT_COLOR, (pos[0]+8, pos[1]), (pos[0], pos[1]+8))
 
     def render(self):
-        pane = pygame.Surface((288,180), SRCALPHA)
+        pane = pygame.Surface((288,195), SRCALPHA)
+
         pygame.draw.rect(pane, self.BACK_COLOR, (0, 0, 288, 13))
-        self.draw_check(pane, (5, 2), True)
-        textsurface = self.draw_tools['font'].render('Stella (A2600)', False, self.TEXT_COLOR)
-        pane.blit(textsurface,(5+12,1))
-        self.draw_check(pane, (5, 2+13), False)
-        textsurface = self.draw_tools['font'].render('FBA', False, self.TEXT_COLOR)
-        pane.blit(textsurface,(5+12,1+13))
+
+        n = 0
+        for system in self.the_config.config:
+            self.draw_check(pane, (5, 2+n*13), system['enabled'])
+            textsurface = self.draw_tools['font'].render(system['name'], False, self.TEXT_COLOR)
+            pane.blit(textsurface,(5+12,1+n*13))
+            n = n + 1
+
         self.draw_tools['screen'].blit(pane, (16, 26))
 
 
