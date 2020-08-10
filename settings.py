@@ -11,6 +11,7 @@ SEPARATOR = ','
 
 # Vars
 config = []
+selected = 0
 screen = None
 font = None
 
@@ -36,5 +37,6 @@ def init():
             for i in range(2,len(items)):
                 system['dirs'].append(items[i])
             config.append(system)
+        file.close()
     except:
         pass

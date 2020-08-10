@@ -19,9 +19,13 @@ EOF
 
 # create opk
 FLIST="config.txt"
-FLIST="${FLIST} main.py"
-FLIST="${FLIST} keys.py"
 FLIST="${FLIST} app.py"
+FLIST="${FLIST} footer.py"
+FLIST="${FLIST} header.py"
+FLIST="${FLIST} keys.py"
+FLIST="${FLIST} main.py"
+FLIST="${FLIST} settings.py"
+FLIST="${FLIST} states.py"
 FLIST="${FLIST} resources"
 FLIST="${FLIST} pystatesbackup.png"
 FLIST="${FLIST} pystatesbackup.sh"

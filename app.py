@@ -13,5 +13,13 @@ def render():
 def handle_events(events):
     for event in events:
         if event.type == pygame.KEYUP:
-            if event.key == keys.RG350_BUTTON_START:
-                pass
+            if event.key == keys.RG350_BUTTON_DOWN:
+                settings.selected = settings.selected + 1
+                if settings.selected > len(settings.config)-1:
+                    settings.selected = len(settings.config)-1
+            if event.key == keys.RG350_BUTTON_UP:
+                settings.selected = settings.selected - 1
+                if settings.selected < 0:
+                    settings.selected = 0
+            if event.key == keys.RG350_BUTTON_A:
+                settings.config[settings.selected]['enabled'] = not settings.config[settings.selected]['enabled']

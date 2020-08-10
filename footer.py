@@ -18,6 +18,14 @@ def render():
     settings.screen.blit(down_icon, (x+10, y))
     settings.screen.blit(textsurface,(x+25,y))
 
+    # Toggle
+    textsurface = settings.font.render('toggle', False, TEXT_COLOR)
+    x = 70
+    y = 227
+    a_icon  = pygame.image.load('resources/A_button.png').convert_alpha()
+    settings.screen.blit(a_icon, (x, y))
+    settings.screen.blit(textsurface,(x+15,y))
+
     # Exit
     textsurface = settings.font.render('exit', False, TEXT_COLOR)
     x = 320-10-textsurface.get_width()-15
