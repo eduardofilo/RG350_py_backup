@@ -11,3 +11,5 @@ def render():
     pygame.draw.lines(settings.screen, FRONT_COLOR, False, [(0, 0), (0,17), (2,19), (317,19), (319,17), (319,0)])
     textsurface = settings.font.render('Py States Backup', False, TEXT_COLOR)
     settings.screen.blit(textsurface,(10,3))
+    textsurface = settings.font.render(str(settings.selected+1) + "/" + str(len(settings.config)), False, TEXT_COLOR)
+    settings.screen.blit(textsurface,(320-15-textsurface.get_width(),3))
