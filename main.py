@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import settings, app, header, states, footer, keys
+import settings, app, header, states, footer, keys, config
 import sys
 import logging
 import pygame
@@ -7,7 +7,7 @@ from pygame.locals import *
 
 
 # Initialization
-settings.init()
+logging.basicConfig(level=logging.DEBUG, filename=settings.LOG, filemode="a+", format="%(asctime)-15s %(levelname)-8s %(message)s")
 successes, failures = pygame.init()
 logging.debug("{0} successes and {1} failures".format(successes, failures))
 pygame.font.init()
@@ -18,6 +18,7 @@ realScreen = pygame.display.set_mode((settings.SCREEN_W,settings.SCREEN_H), HWSU
 settings.screen = pygame.Surface((settings.SCREEN_W,settings.SCREEN_H))
 settings.font = pygame.font.Font('resources/pixelberry.ttf', 8)
 
+config.init()
 
 # Main loop
 dt = 1 / settings.FPS * 1000     # dt is the time since last frame.
