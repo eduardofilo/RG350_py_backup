@@ -20,15 +20,21 @@ def draw_check(surface, pos=(0,0), status=False):
 
 def render():
     pane = pygame.Surface((SYSTEMS_WIDTH, SYSTEM_HEIGHT*N_SYSTEMS_FIT), SRCALPHA)
+    scroll_pane = pygame.Surface((SYSTEMS_WIDTH, SYSTEM_HEIGHT*len(settings.config)), SRCALPHA)
 
     if len(settings.config) > 0:
-        pygame.draw.rect(pane, BACK_COLOR, (0, 0+settings.selected*SYSTEM_HEIGHT, SYSTEMS_WIDTH, SYSTEM_HEIGHT))
+        pygame.draw.rect(scroll_pane, BACK_COLOR, (0, 0+settings.selected*SYSTEM_HEIGHT, SYSTEMS_WIDTH, SYSTEM_HEIGHT))
         n = 0
         for system in settings.config:
-            draw_check(pane, (5, 2+n*SYSTEM_HEIGHT), system['enabled'])
+            draw_check(scroll_pane, (5, 2+n*SYSTEM_HEIGHT), system['enabled'])
             textsurface = settings.font.render(system['name'], False, TEXT_COLOR)
-            pane.blit(textsurface, (5+12, 1+n*SYSTEM_HEIGHT))
+            scroll_pane.blit(textsurface, (5+12, 1+n*SYSTEM_HEIGHT))
             n = n + 1
+        if settings.selected + settings.offset + 1 > N_SYSTEMS_FIT:
+            settings.offset = N_SYSTEMS_FIT - (settings.selected + 1)
+        if settings.selected + settings.offset < 0:
+            settings.offset = settings.offset + 1
+        pane.blit(scroll_pane, (0, settings.offset*SYSTEM_HEIGHT))
     else:
         textsurface = settings.font.render("Bad configuration file or states directories not found", False, TEXT_COLOR_ERROR)
         pane.blit(textsurface, (5, 1))

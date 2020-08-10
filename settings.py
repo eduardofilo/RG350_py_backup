@@ -12,6 +12,7 @@ FPS = 15
 # Vars
 config = []
 selected = 0
+offset = 0
 screen = None
 font = None
 debug = len(sys.argv) > 1 and sys.argv[1]=='debug'
