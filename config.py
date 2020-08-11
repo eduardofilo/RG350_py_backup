@@ -3,9 +3,7 @@ import os
 import logging
 import settings
 
-
 SEPARATOR = ','
-
 
 def init():
     try:
@@ -27,7 +25,6 @@ def init():
     except Exception as e:
         settings.config = []
         logging.error('Wrong format in configuration file. ' + str(e))
-
 
 def save():
     try:
