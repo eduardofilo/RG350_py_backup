@@ -26,7 +26,7 @@ def init():
                     raise Exception("Line %d in config file has insuficient items." % (n+1))
                 system = {'name': items[0].strip(), 'enabled': items[1].strip() == 'True', 'dirs': []}
                 for i in range(2,len(items)):
-                    if os.path.exists(items[i].strip()) and os.path.isdir(items[i].strip()):
+                    if os.path.exists(items[i].strip()):
                         system['dirs'].append(items[i].strip())
                 if len(system['dirs']) > 0:
                     settings.config.append(system)

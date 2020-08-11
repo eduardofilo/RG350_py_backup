@@ -67,18 +67,20 @@ def handle_events(events):
 
 def do_backup(system):
     if settings.system < len(settings.config_enabled):
+        my_cmd = "tar -czf '%s/%s.tgz' %s" % (settings.destination_directory, settings.config_enabled[system]['name'], " ".join(settings.config_enabled[system]['dirs']))
+        os.system(my_cmd)
         time.sleep(0.5)
-        #myCmd = 'ls -la'
-        #os.system(myCmd)
     settings.system = settings.system + 1
     if settings.system >= len(settings.config_enabled):
         settings.status = 0
 
 def do_restore(system):
     if settings.system < len(settings.config_enabled):
+        file = "%s/%s" % (settings.destination_directory, settings.config_enabled[system]['name'])
+        if os.path.exists(file):
+            my_cmd = "tar -xzf '%s.tgz' -C /" % (file)
+            os.system(my_cmd)
         time.sleep(0.5)
-        #myCmd = 'ls -la'
-        #os.system(myCmd)
     settings.system = settings.system + 1
     if settings.system >= len(settings.config_enabled):
         settings.status = 0
