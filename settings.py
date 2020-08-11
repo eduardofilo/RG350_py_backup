@@ -10,6 +10,7 @@ FPS = 15
 
 # Vars
 config = []
+config_enabled = []
 selected = 0
 offset = 0
 status = 0  # 0: NORMAL, 1: ERROR Empty config, 2: ERROR Wrong config, 3: ERROR Destionation Directory not found, 4: NORMAL Confirm backup

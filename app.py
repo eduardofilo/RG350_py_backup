@@ -27,8 +27,10 @@ def handle_events(events):
                         settings.selected = 0
                 elif event.key == keys.RG350_BUTTON_A:
                     settings.config[settings.selected]['enabled'] = not settings.config[settings.selected]['enabled']
+                    settings.config_enabled = filter(lambda system : system['enabled'], settings.config)
                 elif event.key == keys.RG350_BUTTON_B:
-                    settings.status = 4
+                    if len(settings.config_enabled) > 0:
+                        settings.status = 4
             elif settings.status == 4:    # Confirm backup status
                 if event.key == keys.RG350_BUTTON_A:
                     settings.status = 5
@@ -37,10 +39,10 @@ def handle_events(events):
                     settings.status = 0
 
 def do_backup(system):
-    if settings.system < len(settings.config):
+    if settings.system < len(settings.config_enabled):
         time.sleep(0.5)
         #myCmd = 'ls -la'
         #os.system(myCmd)
     settings.system = settings.system + 1
-    if settings.system >= len(settings.config):
+    if settings.system >= len(settings.config_enabled):
         settings.status = 0

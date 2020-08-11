@@ -33,23 +33,24 @@ def render():
         textsurface = settings.font.render('toggle', False, TEXT_COLOR)
         settings.screen.blit(textsurface,(x,y))
 
-        # Backup
-        x = x + textsurface.get_width() + 15
-        b_icon  = pygame.image.load('resources/B_button.png').convert_alpha()
-        settings.screen.blit(b_icon, (x, y))
+        if len(settings.config_enabled) > 0:
+            # Backup
+            x = x + textsurface.get_width() + 15
+            b_icon  = pygame.image.load('resources/B_button.png').convert_alpha()
+            settings.screen.blit(b_icon, (x, y))
 
-        x = x + b_icon.get_width() + 5
-        textsurface = settings.font.render('backup', False, TEXT_COLOR)
-        settings.screen.blit(textsurface,(x,y))
+            x = x + b_icon.get_width() + 5
+            textsurface = settings.font.render('backup', False, TEXT_COLOR)
+            settings.screen.blit(textsurface,(x,y))
 
-        # Restore
-        x = x + textsurface.get_width() + 15
-        x_icon  = pygame.image.load('resources/X_button.png').convert_alpha()
-        settings.screen.blit(x_icon, (x, y))
+            # Restore
+            x = x + textsurface.get_width() + 15
+            x_icon  = pygame.image.load('resources/X_button.png').convert_alpha()
+            settings.screen.blit(x_icon, (x, y))
 
-        x = x + x_icon.get_width() + 5
-        textsurface = settings.font.render('restore', False, TEXT_COLOR)
-        settings.screen.blit(textsurface,(x,y))
+            x = x + x_icon.get_width() + 5
+            textsurface = settings.font.render('restore', False, TEXT_COLOR)
+            settings.screen.blit(textsurface,(x,y))
 
     # Exit
     start_icon  = pygame.image.load('resources/START_button.png').convert_alpha()
