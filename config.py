@@ -6,6 +6,7 @@ import ConfigParser
 
 SEPARATOR = ','
 
+# ConfigParser docu: https://docs.python.org/2.7/library/configparser.html
 def init():
     try:
         settings.error = 0
