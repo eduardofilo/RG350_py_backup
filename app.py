@@ -76,9 +76,9 @@ def do_backup(system):
 
 def do_restore(system):
     if settings.system < len(settings.config_enabled):
-        file = "%s/%s" % (settings.destination_directory, settings.config_enabled[system]['name'])
+        file = "%s/%s.tgz" % (settings.destination_directory, settings.config_enabled[system]['name'])
         if os.path.exists(file):
-            my_cmd = "tar -xzf '%s.tgz' -C /" % (file)
+            my_cmd = "tar -xzf '%s' -C /" % (file)
             os.system(my_cmd)
         time.sleep(0.5)
     settings.system = settings.system + 1
