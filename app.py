@@ -27,10 +27,20 @@ def handler_normal(key):
     elif key == keys.RG350_BUTTON_B:
         if len(settings.config_enabled) > 0:
             settings.status = 4
+    elif key == keys.RG350_BUTTON_X:
+        if len(settings.config_enabled) > 0:
+            settings.status = 6
 
 def handler_confirm_backup(key):
     if key == keys.RG350_BUTTON_A:
         settings.status = 5
+        settings.system = 0
+    elif key == keys.RG350_BUTTON_B:
+        settings.status = 0
+
+def handler_confirm_restore(key):
+    if key == keys.RG350_BUTTON_A:
+        settings.status = 7
         settings.system = 0
     elif key == keys.RG350_BUTTON_B:
         settings.status = 0
@@ -44,7 +54,9 @@ handler_mapping = {
     2: handler_void,
     3: handler_void,
     4: handler_confirm_backup,
-    5: handler_void
+    5: handler_void,
+    6: handler_confirm_restore,
+    7: handler_void
 }
 
 def handle_events(events):
@@ -54,6 +66,15 @@ def handle_events(events):
 
 
 def do_backup(system):
+    if settings.system < len(settings.config_enabled):
+        time.sleep(0.5)
+        #myCmd = 'ls -la'
+        #os.system(myCmd)
+    settings.system = settings.system + 1
+    if settings.system >= len(settings.config_enabled):
+        settings.status = 0
+
+def do_restore(system):
     if settings.system < len(settings.config_enabled):
         time.sleep(0.5)
         #myCmd = 'ls -la'

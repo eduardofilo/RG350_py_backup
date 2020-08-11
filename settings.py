@@ -13,8 +13,8 @@ config = []
 config_enabled = []
 selected = 0
 offset = 0
-status = 0  # 0: NORMAL, 1: ERROR Empty config, 2: ERROR Wrong config, 3: ERROR Destionation Directory not found, 4: NORMAL Confirm backup
-            # 5: NORMAL Doing backup
+status = 0  # 0: NORMAL, 1: ERROR Empty config, 2: ERROR Wrong config, 3: ERROR Destionation Directory not found
+            # 4: NORMAL Confirm backup, 5: NORMAL Doing backup, 6: NORMAL Confirm restore, 7: NORMAL Doing restore
 system = 0
 screen = None
 font = None

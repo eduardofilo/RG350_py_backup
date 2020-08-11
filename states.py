@@ -57,7 +57,7 @@ def wrong_destination_directory_error(pane):
     textsurface = settings.font.render(settings.CONFIG_FILE, False, TEXT_COLOR_ERROR)
     pane.blit(textsurface, (5, 1+2*SYSTEM_HEIGHT))
 
-def confirm_backup(pane):
+def confirm(pane):
     normal(pane)
 
     confirmation_box  = pygame.image.load('resources/confirm.png').convert_alpha()
@@ -83,13 +83,33 @@ def do_backup(pane):
     y = 101-4
     pane.blit(textsurface, (x, y))
 
+def do_restore(pane):
+    normal(pane)
+
+    progress_box  = pygame.image.load('resources/progress.png').convert_alpha()
+    x = SYSTEMS_WIDTH / 2 - progress_box.get_width() / 2
+    y = 101-26
+    pane.blit(progress_box, (x, y))
+
+    textsurface = settings.font.render("Restoring states of:", False, TEXT_COLOR)
+    x = SYSTEMS_WIDTH / 2 - textsurface.get_width() / 2
+    y = 101-20
+    pane.blit(textsurface, (x, y))
+
+    textsurface = settings.font.render(settings.config_enabled[settings.system]['name'], False, TEXT_COLOR)
+    x = SYSTEMS_WIDTH / 2 - textsurface.get_width() / 2
+    y = 101-4
+    pane.blit(textsurface, (x, y))
+
 render_mapping = {
     0: normal,
     1: empty_config_error,
     2: wrong_config_error,
     3: wrong_destination_directory_error,
-    4: confirm_backup,
-    5: do_backup
+    4: confirm,
+    5: do_backup,
+    6: confirm,
+    7: do_restore
 }
 
 def render():

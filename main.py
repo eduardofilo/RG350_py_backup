@@ -44,15 +44,17 @@ while running:
         footer.render()
         realScreen.blit(settings.screen, (0,0))
         pygame.display.flip()
-        dirty = settings.status in [5]
+        dirty = settings.status in [5, 7]
 
     if settings.status == 5:    # Doing backups
         app.do_backup(settings.system)
+    if settings.status == 7:    # Doing restore
+        app.do_restore(settings.system)
 
     dt = clock.tick(settings.FPS)
 
 # Save changes in config
-if settings.status in [0, 4, 5]:
+if settings.status in [0, 4, 5, 6, 7]:
     config.save()
 
 pygame.quit()
