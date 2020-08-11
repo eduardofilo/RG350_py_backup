@@ -7,11 +7,13 @@ SEPARATOR = ','
 
 def init():
     try:
+        settings.error = 0
         with open(settings.CONFIG_FILE, 'r') as file:
             n = 0
             for line in file:
                 items = line[:-1].split(SEPARATOR)
                 if len(items) < 3:
+                    settings.error = 2
                     raise Exception("Line %d in config file has insuficient items." % (n+1))
                 system = {'name': items[0].strip(), 'enabled': items[1].strip() == 'True', 'dirs': []}
                 for i in range(2,len(items)):
@@ -21,9 +23,11 @@ def init():
                     settings.config.append(system)
                 n = n + 1
             if n == 0:
+                settings.error = 1
                 raise Exception("Empty file?")
     except Exception as e:
-        settings.config = []
+        if not settings.error:
+            settings.error = 2
         logging.error('Wrong format in configuration file. ' + str(e))
 
 def save():
@@ -33,5 +37,4 @@ def save():
                 line = "%s,%r,%s\n" % (system['name'], system['enabled'], SEPARATOR.join(system['dirs']))
                 file.write(line)
     except Exception as e:
-        settings.config = []
         logging.error('Problems saving configuration file. ' + str(e))

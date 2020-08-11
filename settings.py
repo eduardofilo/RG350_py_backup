@@ -12,6 +12,7 @@ FPS = 15
 config = []
 selected = 0
 offset = 0
+error = 0   # 1: Empty config, 2: Wrong config
 screen = None
 font = None
 debug = len(sys.argv) > 1 and sys.argv[1]=='debug'
