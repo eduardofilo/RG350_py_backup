@@ -9,7 +9,7 @@ def render():
     # Background
     pygame.draw.rect(settings.screen, BACK_COLOR, (0, 225, 320, 15))
 
-    if len(settings.config) > 0:
+    if not settings.status:
         # Select
         x = 6
         y = 227

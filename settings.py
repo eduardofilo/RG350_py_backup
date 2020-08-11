@@ -12,7 +12,9 @@ FPS = 15
 config = []
 selected = 0
 offset = 0
-error = 0   # 1: Empty config, 2: Wrong config
+status = 0  # 0: NORMAL, 1: ERROR Empty config, 2: ERROR Wrong config, 3: ERROR Destionation Directory not found, 4: NORMAL Confirm backup
+            # 5: NORMAL Doing backup
+system = 0
 screen = None
 font = None
 destination_directory = ""
