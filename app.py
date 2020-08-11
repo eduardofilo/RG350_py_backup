@@ -2,8 +2,7 @@
 import pygame
 from pygame.locals import *
 import logging  #logging.debug(string)
-import keys
-import settings
+import keys, settings, config
 import os
 import time
 
@@ -27,7 +26,7 @@ def handle_events(events):
                         settings.selected = 0
                 elif event.key == keys.RG350_BUTTON_A:
                     settings.config[settings.selected]['enabled'] = not settings.config[settings.selected]['enabled']
-                    settings.config_enabled = filter(lambda system : system['enabled'], settings.config)
+                    config.update_config_enabled()
                 elif event.key == keys.RG350_BUTTON_B:
                     if len(settings.config_enabled) > 0:
                         settings.status = 4

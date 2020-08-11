@@ -31,6 +31,7 @@ def init():
                 if len(system['dirs']) > 0:
                     settings.config.append(system)
                 n = n + 1
+        update_config_enabled()
         if n == 0:
             settings.status = 1
             raise Exception("Empty file?")
@@ -49,3 +50,6 @@ def save():
         config_ini.set('DEFAULT', 'systems', systems)
     with open(settings.CONFIG_FILE, 'wb') as configfile:
         config_ini.write(configfile)
+
+def update_config_enabled():
+    settings.config_enabled = filter(lambda system : system['enabled'], settings.config)

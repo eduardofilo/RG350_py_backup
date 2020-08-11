@@ -44,7 +44,7 @@ while running:
         footer.render()
         realScreen.blit(settings.screen, (0,0))
         pygame.display.flip()
-        dirty = settings.status == 5
+        dirty = settings.status in [5]
 
     if settings.status == 5:    # Doing backups
         app.do_backup(settings.system)
