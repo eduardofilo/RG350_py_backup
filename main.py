@@ -49,7 +49,8 @@ while running:
     dt = clock.tick(settings.FPS)
 
 # Save changes in config
-config.save()
+if not settings.error:
+    config.save()
 
 pygame.quit()
 sys.exit()
