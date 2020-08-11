@@ -16,8 +16,8 @@ error = 0   # 1: Empty config, 2: Wrong config
 screen = None
 font = None
 destination_directory = ""
-debug = len(sys.argv) > 1 and sys.argv[1]=='debug'
-if debug:
+dev = len(sys.argv) > 1 and sys.argv[1]=='dev'
+if dev:
     HOME = "/home/edumoreno/git/rg350_pystatesbackup"
     CONFIG_FILE = HOME + "/config_debug.ini"
 else:
