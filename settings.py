@@ -18,12 +18,12 @@ font = None
 debug = len(sys.argv) > 1 and sys.argv[1]=='debug'
 if debug:
     HOME = "/home/edumoreno/git/rg350_pystatesbackup"
-    CONFIG_FILE = HOME + "/config_debug.txt"
+    CONFIG_FILE = HOME + "/config_debug.ini"
 else:
     HOME = "/media/data/local/home/.pystatesbackup"
-    CONFIG_FILE = HOME + "/config.txt"
+    CONFIG_FILE = HOME + "/config.ini"
     if not os.path.exists(HOME):
         os.makedirs(HOME)
     if not os.path.exists(CONFIG_FILE):
-        os.system('cp config.txt ' + CONFIG_FILE)
+        os.system('cp config.ini ' + CONFIG_FILE)
 LOG = HOME + "/log.txt"

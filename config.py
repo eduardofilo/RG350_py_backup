@@ -2,16 +2,20 @@
 import os
 import logging
 import settings
+import ConfigParser
 
 SEPARATOR = ','
 
 def init():
     try:
         settings.error = 0
-        with open(settings.CONFIG_FILE, 'r') as file:
-            n = 0
-            for line in file:
-                items = line[:-1].split(SEPARATOR)
+        config_ini = ConfigParser.RawConfigParser()
+        config_ini.read(settings.CONFIG_FILE)
+        systems = config_ini.get('DEFAULT', 'systems')
+        n = 0
+        for line in systems.split('\n'):
+            if line:
+                items = line.split(SEPARATOR)
                 if len(items) < 3:
                     settings.error = 2
                     raise Exception("Line %d in config file has insuficient items." % (n+1))
@@ -22,19 +26,20 @@ def init():
                 if len(system['dirs']) > 0:
                     settings.config.append(system)
                 n = n + 1
-            if n == 0:
-                settings.error = 1
-                raise Exception("Empty file?")
+        if n == 0:
+            settings.error = 1
+            raise Exception("Empty file?")
     except Exception as e:
         if not settings.error:
             settings.error = 2
         logging.error('Wrong format in configuration file. ' + str(e))
 
 def save():
-    try:
-        with open(settings.CONFIG_FILE, 'w') as file:
-            for system in settings.config:
-                line = "%s,%r,%s\n" % (system['name'], system['enabled'], SEPARATOR.join(system['dirs']))
-                file.write(line)
-    except Exception as e:
-        logging.error('Problems saving configuration file. ' + str(e))
+    config_ini = ConfigParser.RawConfigParser()
+    systems = ""
+    for system in settings.config:
+        line = "\n%s,%r,%s" % (system['name'], system['enabled'], SEPARATOR.join(system['dirs']))
+        systems = systems + line
+        config_ini.set('DEFAULT', 'systems', systems)
+    with open(settings.CONFIG_FILE, 'wb') as configfile:
+        config_ini.write(configfile)

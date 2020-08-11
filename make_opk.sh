@@ -18,7 +18,7 @@ Categories=applications;
 EOF
 
 # create opk
-FLIST="config.txt"
+FLIST="config.ini"
 FLIST="${FLIST} app.py"
 FLIST="${FLIST} config.py"
 FLIST="${FLIST} footer.py"
