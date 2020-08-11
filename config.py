@@ -31,7 +31,6 @@ def save():
         with open(settings.CONFIG_FILE, 'w') as file:
             for system in settings.config:
                 line = "%s,%r,%s\n" % (system['name'], system['enabled'], SEPARATOR.join(system['dirs']))
-                logging.debug(line)
                 file.write(line)
     except Exception as e:
         settings.config = []
