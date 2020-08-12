@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import pygame
 from pygame.locals import *
-import logging  #logging.debug(string)
 import keys, settings, config
 import os
 import time
