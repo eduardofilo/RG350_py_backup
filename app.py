@@ -69,6 +69,8 @@ def do_backup(system):
         backup_file = settings.backup_filename(settings.config[system]['name'])
         my_cmd = "tar -czf '%s' %s" % (backup_file, " ".join(settings.config[system]['dirs']))
         os.system(my_cmd)
+        my_cmd = "sync"
+        os.system(my_cmd)
         time.sleep(0.5)
     settings.system = settings.next_backup_system(settings.system + 1)
     if settings.system < 0:
@@ -79,6 +81,8 @@ def do_restore(system):
         backup_file = settings.backup_filename(settings.config[system]['name'])
         if os.path.exists(backup_file):
             my_cmd = "tar -xzf '%s' -C /" % (backup_file)
+            os.system(my_cmd)
+            my_cmd = "sync"
             os.system(my_cmd)
         time.sleep(0.5)
     settings.system = settings.next_restore_system(settings.system + 1)
