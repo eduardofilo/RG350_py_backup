@@ -5,6 +5,7 @@ from pygame.locals import *
 import math
 
 TEXT_COLOR = (248, 252, 248)
+TEXT_COLOR2 = (248, 252, 0)
 TEXT_COLOR_ERROR = (255 ,65, 65)
 BACK_COLOR = (154, 90, 178)
 UNAVAILABLE_COLOR = (100, 100, 100)
@@ -64,20 +65,40 @@ def wrong_destination_directory_error(pane):
 def confirm(pane):
     normal(pane)
 
-    confirmation_box  = pygame.image.load('resources/confirm.png').convert_alpha()
+    confirmation_box  = pygame.image.load('resources/popup.png').convert_alpha()
     x = SYSTEMS_WIDTH / 2 - confirmation_box.get_width() / 2
     y = 101-26
     pane.blit(confirmation_box, (x, y))
 
+    textsurface = settings.font.render("Are you sure?", False, TEXT_COLOR)
+    x = SYSTEMS_WIDTH / 2 - textsurface.get_width() / 2
+    y = 101-20
+    pane.blit(textsurface, (x, y))
+
+    a_icon  = pygame.image.load('resources/A_button.png').convert_alpha()
+    textsurface_a = settings.font.render("accept", False, TEXT_COLOR2)
+    b_icon  = pygame.image.load('resources/B_button.png').convert_alpha()
+    textsurface_b = settings.font.render("cancel", False, TEXT_COLOR2)
+
+    x = SYSTEMS_WIDTH / 2 - (a_icon.get_width() + 5 + textsurface_a.get_width() + 10 + b_icon.get_width() + 5 + textsurface_b.get_width()) / 2
+    y = 101-4
+    pane.blit(a_icon, (x, y))
+    x += a_icon.get_width() + 5
+    pane.blit(textsurface_a, (x, y))
+    x += textsurface_a.get_width() + 10
+    pane.blit(b_icon, (x, y))
+    x += b_icon.get_width() + 5
+    pane.blit(textsurface_b, (x, y))
+
 def do_backup(pane):
     normal(pane)
 
-    progress_box  = pygame.image.load('resources/progress.png').convert_alpha()
-    x = SYSTEMS_WIDTH / 2 - progress_box.get_width() / 2
+    popup_box  = pygame.image.load('resources/popup.png').convert_alpha()
+    x = SYSTEMS_WIDTH / 2 - popup_box.get_width() / 2
     y = 101-26
-    pane.blit(progress_box, (x, y))
+    pane.blit(popup_box, (x, y))
 
-    textsurface = settings.font.render("Backing up states of:", False, TEXT_COLOR)
+    textsurface = settings.font.render("Backing up:", False, TEXT_COLOR)
     x = SYSTEMS_WIDTH / 2 - textsurface.get_width() / 2
     y = 101-20
     pane.blit(textsurface, (x, y))
@@ -90,12 +111,12 @@ def do_backup(pane):
 def do_restore(pane):
     normal(pane)
 
-    progress_box  = pygame.image.load('resources/progress.png').convert_alpha()
-    x = SYSTEMS_WIDTH / 2 - progress_box.get_width() / 2
+    popup_box  = pygame.image.load('resources/popup.png').convert_alpha()
+    x = SYSTEMS_WIDTH / 2 - popup_box.get_width() / 2
     y = 101-26
-    pane.blit(progress_box, (x, y))
+    pane.blit(popup_box, (x, y))
 
-    textsurface = settings.font.render("Restoring states of:", False, TEXT_COLOR)
+    textsurface = settings.font.render("Restoring:", False, TEXT_COLOR)
     x = SYSTEMS_WIDTH / 2 - textsurface.get_width() / 2
     y = 101-20
     pane.blit(textsurface, (x, y))
