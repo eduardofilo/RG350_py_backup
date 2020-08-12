@@ -25,8 +25,9 @@ def load():
                 if len(items) < 3:
                     settings.status = 2
                     raise Exception("Line %d in config file has insuficient items." % (n+1))
-                backup_file = settings.backup_filename(items[0].strip())
-                system = {'name': items[0].strip(), 'enabled': items[1].strip() == 'True', 'backup_available': os.path.exists(backup_file), 'dirs': []}
+                system_name = items[0].strip()
+                backup_file = settings.backup_filename(system_name)
+                system = {'name': system_name, 'enabled': items[1].strip() == 'True', 'backup_available': os.path.exists(backup_file), 'dirs': []}
                 for i in range(2,len(items)):
                     if os.path.exists(items[i].strip()):
                         system['dirs'].append(items[i].strip())
