@@ -48,7 +48,7 @@ while running:
 
     if settings.status == 5:    # Doing backups
         app.do_backup(settings.system)
-        config.update_backup_available()
+        settings.update_backup_available()
     if settings.status == 7:    # Doing restore
         app.do_restore(settings.system)
 

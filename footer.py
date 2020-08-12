@@ -33,7 +33,7 @@ def render():
         textsurface = settings.font.render('toggle', False, TEXT_COLOR)
         settings.screen.blit(textsurface,(x,y))
 
-        if len(settings.config_enabled) > 0:
+        if settings.n_systems_enabled() > 0:
             # Backup
             x = x + textsurface.get_width() + 15
             b_icon  = pygame.image.load('resources/B_button.png').convert_alpha()
@@ -43,6 +43,7 @@ def render():
             textsurface = settings.font.render('backup', False, TEXT_COLOR)
             settings.screen.blit(textsurface,(x,y))
 
+        if settings.n_backups_available() > 0:
             # Restore
             x = x + textsurface.get_width() + 15
             x_icon  = pygame.image.load('resources/X_button.png').convert_alpha()

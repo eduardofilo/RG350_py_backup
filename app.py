@@ -24,25 +24,24 @@ def handler_normal(key):
     elif key == keys.RG350_BUTTON_A:
         if settings.config[settings.selected]['source_available']:
             settings.config[settings.selected]['enabled'] = not settings.config[settings.selected]['enabled']
-            config.update_config_enabled()
     elif key == keys.RG350_BUTTON_B:
-        if len(settings.config_enabled) > 0:
+        if settings.n_systems_enabled() > 0:
             settings.status = 4
     elif key == keys.RG350_BUTTON_X:
-        if len(settings.config_enabled) > 0:
+        if settings.n_backups_available() > 0:
             settings.status = 6
 
 def handler_confirm_backup(key):
     if key == keys.RG350_BUTTON_A:
         settings.status = 5
-        settings.system = 0
+        settings.system = settings.next_backup_system(0)
     elif key == keys.RG350_BUTTON_B:
         settings.status = 0
 
 def handler_confirm_restore(key):
     if key == keys.RG350_BUTTON_A:
         settings.status = 7
-        settings.system = 0
+        settings.system = settings.next_restore_system(0)
     elif key == keys.RG350_BUTTON_B:
         settings.status = 0
 
@@ -67,22 +66,22 @@ def handle_events(events):
 
 
 def do_backup(system):
-    if settings.system < len(settings.config_enabled):
-        backup_file = settings.backup_filename(settings.config_enabled[system]['name'])
-        my_cmd = "tar -czf '%s' %s" % (backup_file, " ".join(settings.config_enabled[system]['dirs']))
+    if settings.system < len(settings.config):
+        backup_file = settings.backup_filename(settings.config[system]['name'])
+        my_cmd = "tar -czf '%s' %s" % (backup_file, " ".join(settings.config[system]['dirs']))
         os.system(my_cmd)
         time.sleep(0.5)
-    settings.system = settings.system + 1
-    if settings.system >= len(settings.config_enabled):
+    settings.system = settings.next_backup_system(settings.system + 1)
+    if settings.system < 0:
         settings.status = 0
 
 def do_restore(system):
-    if settings.system < len(settings.config_enabled):
-        backup_file = settings.backup_filename(settings.config_enabled[system]['name'])
+    if settings.system < len(settings.config):
+        backup_file = settings.backup_filename(settings.config[system]['name'])
         if os.path.exists(backup_file):
             my_cmd = "tar -xzf '%s' -C /" % (backup_file)
             os.system(my_cmd)
         time.sleep(0.5)
-    settings.system = settings.system + 1
-    if settings.system >= len(settings.config_enabled):
+    settings.system = settings.next_restore_system(settings.system + 1)
+    if settings.system < 0:
         settings.status = 0

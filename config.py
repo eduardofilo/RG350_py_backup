@@ -36,7 +36,6 @@ def load():
                 system = {'name': system_name, 'enabled': items[1].strip() == 'True', 'backup_available': os.path.exists(backup_file), 'source_available': source_available, 'dirs': dirs}
                 settings.config.append(system)
                 n = n + 1
-        update_config_enabled()
         if n == 0:
             settings.status = 1
             raise Exception("Empty file?")
@@ -55,11 +54,3 @@ def save():
         config_ini.set('DEFAULT', 'systems', systems)
     with open(settings.CONFIG_FILE, 'wb') as configfile:
         config_ini.write(configfile)
-
-def update_config_enabled():
-    settings.config_enabled = filter(lambda system : system['source_available'] and system['enabled'], settings.config)
-
-def update_backup_available():
-    for system in settings.config:
-        backup_file = settings.backup_filename(system['name'])
-        system['backup_available'] = os.path.exists(backup_file)

@@ -82,7 +82,7 @@ def do_backup(pane):
     y = 101-20
     pane.blit(textsurface, (x, y))
 
-    textsurface = settings.font.render(settings.config_enabled[settings.system]['name'], False, TEXT_COLOR)
+    textsurface = settings.font.render(settings.config[settings.system]['name'], False, TEXT_COLOR)
     x = SYSTEMS_WIDTH / 2 - textsurface.get_width() / 2
     y = 101-4
     pane.blit(textsurface, (x, y))
@@ -100,7 +100,7 @@ def do_restore(pane):
     y = 101-20
     pane.blit(textsurface, (x, y))
 
-    textsurface = settings.font.render(settings.config_enabled[settings.system]['name'], False, TEXT_COLOR)
+    textsurface = settings.font.render(settings.config[settings.system]['name'], False, TEXT_COLOR)
     x = SYSTEMS_WIDTH / 2 - textsurface.get_width() / 2
     y = 101-4
     pane.blit(textsurface, (x, y))
