@@ -68,7 +68,8 @@ def handle_events(events):
 
 def do_backup(system):
     if settings.system < len(settings.config_enabled):
-        my_cmd = "tar -czf '%s/%s.tgz' %s" % (settings.destination_directory, settings.config_enabled[system]['name'], " ".join(settings.config_enabled[system]['dirs']))
+        backup_file = settings.backup_filename(settings.config_enabled[system]['name'])
+        my_cmd = "tar -czf '%s' %s" % (backup_file, " ".join(settings.config_enabled[system]['dirs']))
         os.system(my_cmd)
         time.sleep(0.5)
     settings.system = settings.system + 1

@@ -33,4 +33,5 @@ else:
 LOG = HOME + "/log.txt"
 
 def backup_filename(system_name):
+    system_name = system_name.replace('/', '-')
     return "%s/%s.tgz" % (destination_directory, system_name)
