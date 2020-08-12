@@ -27,12 +27,14 @@ def load():
                     raise Exception("Line %d in config file has insuficient items." % (n+1))
                 system_name = items[0].strip()
                 backup_file = settings.backup_filename(system_name)
-                system = {'name': system_name, 'enabled': items[1].strip() == 'True', 'backup_available': os.path.exists(backup_file), 'dirs': []}
+                source_available = False
+                dirs = []
                 for i in range(2,len(items)):
-                    if os.path.exists(items[i].strip()):
-                        system['dirs'].append(items[i].strip())
-                if len(system['dirs']) > 0:
-                    settings.config.append(system)
+                    system_dir = items[i].strip()
+                    dirs.append(system_dir)
+                    source_available = source_available or os.path.exists(system_dir)
+                system = {'name': system_name, 'enabled': items[1].strip() == 'True', 'backup_available': os.path.exists(backup_file), 'source_available': source_available, 'dirs': dirs}
+                settings.config.append(system)
                 n = n + 1
         update_config_enabled()
         if n == 0:
@@ -55,7 +57,7 @@ def save():
         config_ini.write(configfile)
 
 def update_config_enabled():
-    settings.config_enabled = filter(lambda system : system['enabled'], settings.config)
+    settings.config_enabled = filter(lambda system : system['source_available'] and system['enabled'], settings.config)
 
 def update_backup_available():
     for system in settings.config:
