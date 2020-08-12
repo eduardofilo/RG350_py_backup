@@ -7,6 +7,9 @@ import pygame
 SCREEN_W = 320
 SCREEN_H = 240
 FPS = 15
+v_file  = open("v", "r")
+V = v_file.readline()[:-1]
+v_file.close()
 
 # Vars
 config = []

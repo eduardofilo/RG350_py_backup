@@ -52,5 +52,5 @@ def save():
         line = "\n%s,%r,%s" % (system['name'], system['enabled'], SEPARATOR.join(system['dirs']))
         systems = systems + line
         config_ini.set('DEFAULT', 'systems', systems)
-    with open(settings.CONFIG_FILE, 'wb') as configfile:
+    with open(settings.CONFIG_FILE, 'w') as configfile:
         config_ini.write(configfile)

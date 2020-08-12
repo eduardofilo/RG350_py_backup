@@ -1,6 +1,6 @@
 #!/bin/sh
 
-OPK_NAME=py_backup.opk
+OPK_NAME=py_backup_`cat v`.opk
 
 echo ${OPK_NAME}
 
@@ -27,6 +27,7 @@ FLIST="${FLIST} keys.py"
 FLIST="${FLIST} main.py"
 FLIST="${FLIST} settings.py"
 FLIST="${FLIST} states.py"
+FLIST="${FLIST} v"
 FLIST="${FLIST} resources"
 FLIST="${FLIST} py_backup.png"
 FLIST="${FLIST} py_backup.sh"
