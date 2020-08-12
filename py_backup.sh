@@ -28,7 +28,7 @@ fi
 . /etc/profile
 
 # Creating home directory for config
-if [ ! -f /media/data/local/home/.py_backup ] ; then
+if [ ! -d /media/data/local/home/.py_backup ] ; then
     mkdir /media/data/local/home/.py_backup
     cp config.ini /media/data/local/home/.py_backup
 fi
