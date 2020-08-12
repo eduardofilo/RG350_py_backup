@@ -24,7 +24,7 @@ def normal(pane):
     n = 0
     for system in settings.config:
         draw_check(scroll_pane, (5, 2+n*SYSTEM_HEIGHT), system['enabled'])
-        textsurface = settings.font.render(system['name'], False, TEXT_COLOR)
+        textsurface = settings.font.render(system['name'], False, TEXT_COLOR if system['backup_available'] else TEXT_COLOR_ERROR)
         scroll_pane.blit(textsurface, (5+12, 1+n*SYSTEM_HEIGHT))
         n = n + 1
     if settings.selected + settings.offset + 1 > N_SYSTEMS_FIT:

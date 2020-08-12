@@ -31,3 +31,6 @@ else:
     if not os.path.exists(CONFIG_FILE):
         os.system('cp config.ini ' + CONFIG_FILE)
 LOG = HOME + "/log.txt"
+
+def backup_filename(system_name):
+    return "%s/%s.tgz" % (destination_directory, system_name)

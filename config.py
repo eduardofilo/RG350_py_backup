@@ -7,7 +7,8 @@ import ConfigParser
 SEPARATOR = ','
 
 # ConfigParser docu: https://docs.python.org/2.7/library/configparser.html
-def init():
+def load():
+    settings.config = []
     try:
         settings.status = 0
         config_ini = ConfigParser.RawConfigParser()
@@ -24,7 +25,8 @@ def init():
                 if len(items) < 3:
                     settings.status = 2
                     raise Exception("Line %d in config file has insuficient items." % (n+1))
-                system = {'name': items[0].strip(), 'enabled': items[1].strip() == 'True', 'dirs': []}
+                backup_file = settings.backup_filename(items[0].strip())
+                system = {'name': items[0].strip(), 'enabled': items[1].strip() == 'True', 'backup_available': os.path.exists(backup_file), 'dirs': []}
                 for i in range(2,len(items)):
                     if os.path.exists(items[i].strip()):
                         system['dirs'].append(items[i].strip())
@@ -53,3 +55,8 @@ def save():
 
 def update_config_enabled():
     settings.config_enabled = filter(lambda system : system['enabled'], settings.config)
+
+def update_backup_available():
+    for system in settings.config:
+        backup_file = settings.backup_filename(system['name'])
+        system['backup_available'] = os.path.exists(backup_file)
