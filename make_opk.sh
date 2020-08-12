@@ -1,19 +1,19 @@
 #!/bin/sh
 
-OPK_NAME=pystatesbackup.opk
+OPK_NAME=py_backup.opk
 
 echo ${OPK_NAME}
 
 # create default.gcw0.desktop
 cat > default.gcw0.desktop <<EOF
 [Desktop Entry]
-Name=Py States Backup
-Comment=Savestates directories backup
-Exec=pystatesbackup.sh
+Name=Py Backup
+Comment=Backup of selected directories/files
+Exec=py_backup.sh
 Terminal=false
 Type=Application
 StartupNotify=true
-Icon=pystatesbackup
+Icon=py_backup
 Categories=applications;
 EOF
 
@@ -28,8 +28,8 @@ FLIST="${FLIST} main.py"
 FLIST="${FLIST} settings.py"
 FLIST="${FLIST} states.py"
 FLIST="${FLIST} resources"
-FLIST="${FLIST} pystatesbackup.png"
-FLIST="${FLIST} pystatesbackup.sh"
+FLIST="${FLIST} py_backup.png"
+FLIST="${FLIST} py_backup.sh"
 FLIST="${FLIST} default.gcw0.desktop"
 
 rm -f ${OPK_NAME}
