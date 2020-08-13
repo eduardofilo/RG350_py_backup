@@ -70,7 +70,13 @@ def confirm(pane):
     y = 101-26
     pane.blit(confirmation_box, (x, y))
 
-    textsurface = settings.font.render("Are you sure?", False, TEXT_COLOR)
+    if settings.status == 4:
+        message = "Are you sure to begin backup?"
+    elif settings.status == 6:
+        message = "Are you sure to begin restore?"
+    else:
+        message = "Are you sure?"
+    textsurface = settings.font.render(message, False, TEXT_COLOR)
     x = SYSTEMS_WIDTH / 2 - textsurface.get_width() / 2
     y = 101-20
     pane.blit(textsurface, (x, y))
