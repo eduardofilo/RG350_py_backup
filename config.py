@@ -13,10 +13,14 @@ def load():
         settings.status = 0
         config_ini = ConfigParser.RawConfigParser()
         config_ini.read(settings.CONFIG_FILE)
-        settings.destination_directory = config_ini.get('DEFAULT', 'destination_directory')
-        if not (os.path.exists(settings.destination_directory.strip()) and os.path.isdir(settings.destination_directory.strip())):
+        settings.destination_directory = config_ini.get('DEFAULT', 'destination_directory').strip()
+        if not os.path.exists(settings.destination_directory):
+            # We try to create destination directory
+            my_cmd = "mkdir '%s'" % (settings.destination_directory)
+            os.system(my_cmd)
+        if not (os.path.exists(settings.destination_directory) and os.path.isdir(settings.destination_directory)):
             settings.status = 3
-            raise Exception("Destination directory doesn't exists?")
+            raise Exception("Destination directory '%s' is not accessible." % (settings.destination_directory))
         systems = config_ini.get('DEFAULT', 'systems')
         n = 0
         for line in systems.split('\n'):

@@ -55,7 +55,7 @@ def wrong_config_error(pane):
     pane.blit(textsurface, (5, 1+2*SYSTEM_HEIGHT))
 
 def wrong_destination_directory_error(pane):
-    textsurface = settings.font.render("Destination directory not found.", False, TEXT_COLOR_ERROR)
+    textsurface = settings.font.render("Destination directory not accesible.", False, TEXT_COLOR_ERROR)
     pane.blit(textsurface, (5, 1))
     textsurface = settings.font.render("Review config file at:", False, TEXT_COLOR_ERROR)
     pane.blit(textsurface, (5, 1+SYSTEM_HEIGHT))
