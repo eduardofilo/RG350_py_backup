@@ -15,11 +15,11 @@ def handler_normal(key):
     if key == keys.RG350_BUTTON_DOWN:
         settings.selected += 1
         if settings.selected > len(settings.config) - 1:
-            settings.selected = len(settings.config) - 1
+            settings.selected = 0
     elif key == keys.RG350_BUTTON_UP:
         settings.selected -= 1
         if settings.selected < 0:
-            settings.selected = 0
+            settings.selected = len(settings.config) - 1
     elif key == keys.RG350_BUTTON_A:
         if settings.config[settings.selected]['source_available']:
             settings.config[settings.selected]['enabled'] = not settings.config[settings.selected]['enabled']
