@@ -32,10 +32,11 @@ def normal(pane):
         textsurface = settings.font.render(system['name'], False, color)
         scroll_pane.blit(textsurface, (5+12, 1+n*SYSTEM_HEIGHT))
         n = n + 1
-    if settings.selected + settings.offset + 1 > N_SYSTEMS_FIT:
-        settings.offset = N_SYSTEMS_FIT - (settings.selected + 1)
-    if settings.selected + settings.offset < 0:
-        settings.offset = settings.offset + 1
+    # selected out of screen => recalculate offset
+    if settings.offset < -settings.selected:
+        settings.offset = -settings.selected
+    if settings.offset > N_SYSTEMS_FIT - 1 - settings.selected:
+        settings.offset = N_SYSTEMS_FIT - 1 - settings.selected
     pane.blit(scroll_pane, (0, settings.offset*SYSTEM_HEIGHT))
 
 def empty_config_error(pane):
