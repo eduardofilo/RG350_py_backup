@@ -48,14 +48,14 @@ def handler_void(key):
     pass
 
 handler_mapping = {
-    0: handler_normal,
-    1: handler_void,
-    2: handler_void,
-    3: handler_void,
-    4: handler_confirm_backup,
-    5: handler_void,
-    6: handler_confirm_restore,
-    7: handler_void
+    0: handler_normal,          # 0: NORMAL
+    1: handler_void,            # 1: ERROR Empty config
+    2: handler_void,            # 2: ERROR Wrong config
+    3: handler_void,            # 3: ERROR Destionation Directory not accessible
+    4: handler_confirm_backup,  # 4: NORMAL Confirm backup
+    5: handler_void,            # 5: NORMAL Doing backup
+    6: handler_confirm_restore, # 6: NORMAL Confirm restore
+    7: handler_void             # 7: NORMAL Doing restore
 }
 
 def handle_events(events):
