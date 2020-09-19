@@ -21,8 +21,8 @@ system = 0
 screen = None
 font = None
 destination_directory = ""
-dev = len(sys.argv) > 1 and sys.argv[1]=='dev'
-if dev:
+
+if 'dev' in sys.argv:
     HOME = "/home/edumoreno/git/rg350_py_backup"
     CONFIG_FILE = HOME + "/config_debug.ini"
 else:
