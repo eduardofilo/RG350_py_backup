@@ -1,5 +1,7 @@
 ![Py Backup Icon](images/logo.png)
 
+# Py Backup
+
 Py Backup es un programa que nos va a facilitar la gestión de los backups en la RG350. Está pensado principalmente para respaldar los directorios donde se almacenan los savestates (las partidas) de los emuladores, pero modificando su configuración podemos utilizarlo para hacer backup de cualquier fichero o directorio de la consola.
 
 ## Instalación
