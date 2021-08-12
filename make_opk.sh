@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Stock version
-OPK_NAME=py_backup_`cat v`.opk
+OPK_NAME=py_backup_`cat v`_stock.opk
 
 echo ${OPK_NAME}
 
