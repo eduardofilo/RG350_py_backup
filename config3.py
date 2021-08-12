@@ -2,16 +2,16 @@
 import os
 import logging
 import settings
-from configparser import ConfigParser
+import configparser
 
 SEPARATOR = ','
 
-# ConfigParser docu: https://docs.python.org/2.7/library/configparser.html
+# configparser docu: https://docs.python.org/3/library/configparser.html
 def load():
     settings.config = []
     try:
         settings.status = 0
-        config_ini = ConfigParser.RawConfigParser()
+        config_ini = configparser.RawConfigParser()
         config_ini.read(settings.CONFIG_FILE)
         settings.destination_directory = config_ini.get('DEFAULT', 'destination_directory').strip()
         if not os.path.exists(settings.destination_directory):
@@ -49,7 +49,7 @@ def load():
         logging.error('Wrong format in configuration file. ' + str(e))
 
 def save():
-    config_ini = ConfigParser.RawConfigParser()
+    config_ini = configparser.RawConfigParser()
     config_ini.set('DEFAULT', 'destination_directory', settings.destination_directory)
     systems = ""
     for system in settings.config:

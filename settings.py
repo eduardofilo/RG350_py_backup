@@ -40,11 +40,11 @@ def backup_filename(system_name):
 
 def n_systems_enabled():
     systems_enabled = filter(lambda system : system['source_available'] and system['enabled'], config)
-    return len(systems_enabled)
+    return len(list(systems_enabled))
 
 def n_backups_available():
     backups_available = filter(lambda system : system['source_available'] and system['enabled'] and system['backup_available'], config)
-    return len(backups_available)
+    return len(list(backups_available))
 
 def update_backup_available():
     for system in config:
