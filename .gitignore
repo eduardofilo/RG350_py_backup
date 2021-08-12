@@ -1,3 +1,4 @@
 log.txt
 releases/
 *.pyc
+config.py
