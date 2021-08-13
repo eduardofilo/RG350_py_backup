@@ -2,32 +2,32 @@
 
 # Py Backup
 
-Py Backup es un programa que nos va a facilitar la gestión de los backups en la RG350. Está pensado principalmente para respaldar los directorios donde se almacenan los savestates (las partidas) de los emuladores, pero modificando su configuración podemos utilizarlo para hacer backup de cualquier fichero o directorio de la consola.
+Py Backup is a application that will facilitate the management of backups on the RG350 and RG280 consoles. It is designed mainly to back up the directories where the savestates of the emulators are stored, but by modifying its configuration file we can use it to make a backup/restore of any file or directory on the console.
 
-## Instalación
+## Installation
 
-La aplicación tiene forma de OPK, por lo que se instalará como habitualmente copiando el fichero a una de las dos rutas que explora GMenu2X para mostrar los lanzadores, es decir:
+The application is in the form of an OPK, so it will be installed as usual by copying the file to one of the two paths that GMenu2X and SimpleMenu explores to show the launchers, that is:
 
-* Tarjeta interna: `/media/data/apps`
-* Tarjeta externa: `/media/sdcard/apps`
+* Internal card: `/media/data/apps`
+* External card (in ODBeta only when the card has not label): `/media/sdcard/apps`
 
-El OPK lo podemos bajar de la sección [releases](https://github.com/eduardofilo/RG350_py_backup/releases) de este repositorio.
+The OPK can be downloaded from the [releases](https://github.com/eduardofilo/RG350_py_backup/releases/latest) section of this repository.
 
-Una vez instalada, podremos encontrar la aplicación en la sección *Applications* de los distintos lanzadores:
+Once installed, we can find the application in the *Applications* section of the different launchers:
 
 ![GMenu2X](images/gmenu2x.png)
 ![PyMenu](images/pymenu.png)
 ![SimpleMenu](images/simplemenu.png)
 
-## Configuración
+## Configuration
 
-La configuración de Py Backup se hace por medio del fichero que se crea en la siguiente ruta la primera vez que se ejecuta:
+Py Backup configuration is done through the file that is created in the following path the first time it is run:
 
 ```
 /media/data/local/home/.py_backup/config.ini
 ```
 
-Por defecto viene con las rutas de los directorios de savestate de varios emuladores populares:
+By default it comes with the savestate directory paths of various popular emulators:
 
 ```
 [DEFAULT]
@@ -57,68 +57,68 @@ systems =
     OpenMSX (MSX),True,/media/data/local/home/.openMSX/savestates
 ```
 
-Como vemos dentro del fichero de tipo [INI](https://es.wikipedia.org/wiki/INI_(extensi%C3%B3n_de_archivo)) encontramos dos parámetros:
+As we can see inside the file of type [INI](https://en.wikipedia.org/wiki/INI_file) we find two parameters:
 
-* `destination_directory`: Contiene la ruta sobre la que queremos que se dejen los backups.
-* `systems`: Contiene los varios (uno por linea) ficheros de backup que podemos crear y gestionar por separado. Normalmente cada uno de estos ficheros estará asociado a un emulador o sistema.
+* `destination_directory`: It contains the path on which we want the backups to be left.
+* `systems`: It contains the various (one per line) backup files that we can create and manage separately. Normally each of these files will be associated with an emulator or system.
 
-Los ficheros de backup indicados en el parámetro `systems` se configuran por una serie de elementos separados por comas en el siguiente orden:
+The backup files indicated in the `systems` parameter are made up of a series of elements separated by commas in the following order:
 
-1. Nombre del fichero de backup. Una vez ejecutado el backup encontraremos un fichero con este nombre y extensión `tgz` en el directorio indicado en `destination_directory`.
-2. `True` o `False` para indicar si queremos activar o desactivar el fichero de backup. Esto puede modificarse fácilmente desde el propio interfaz del programa como luego veremos.
-3. Listado de ficheros o directorios (separados por comas) que se incluirán en el fichero de backup.
+1. Backup file name. Once the backup is executed, we will find a file with this name and extension `tgz` in the directory indicated in `destination_directory`.
+2. `True` or `False` to indicate if we want to enable or disable the backup file. This can be easily modified from the program's own interface, as we will see later.
+3. List of files or directories (separated by commas) that will be included in the backup file.
 
-Es importante que las lineas que contienen las definiciones de los ficheros de backup estén indentados con 4 espacios o un tabulador.
+It is important that the lines that contain the definitions of the backup files are indented with 4 spaces or a tab.
 
-Por ejemplo vamos a analizar la configuración del fichero de backup siguiente:
+For example, we are going to analyze the configuration of the following backup file:
 
 ```
     PCSX4All (PS),True,/media/data/local/home/.pcsx4all/sstates,/media/data/local/home/.pcsx4all/memcards
 ```
 
-Al ejecutar el backup, aparecerá un fichero de nombre `PCSX4All (PS).tgz` en el directorio `/media/sdcard/backups` y con el contenido de los dos siguientes directorios:
+When executing the backup, a file named `PCSX4All (PS).tgz` will appear in the directory `/media/sdcard/backups` with the contents of the following two directories:
 
 * `/media/data/local/home/.pcsx4all/sstates`
 * `/media/data/local/home/.pcsx4all/memcards`
 
-## Utilización
+## Usage
 
-Cuando abramos la aplicación por primera vez encontraremos los ficheros de backup definidos en la configuración predeterminada. Dependiendo de si tenemos instalados en nuestra consola los emuladores relacionados con estos ficheros, éstos aparecerán coloreados de una u otra forma que luego explicaremos. En caso de tener todos los emuladores instalados, seguramente veremos algo como lo siguiente:
+When we open the application for the first time we will find the backup files defined in the default configuration file. Depending on whether we have the emulators related to these files installed in our console, they will appear colored in one way or another that we will explain later. In case of having all the emulators installed, we will surely see something like the following:
 
 ![First launch](images/first_launch.png)
 
-En todo momento la aplicación indica los controles disponibles para su manejo. Según lo visto en la pantalla anterior, en este caso lo que podríamos hacer es navegar por los distintos ficheros con Arriba/Abajo, marcar o desmarcar (*toggle*) con la tecla `A` y finalmente ejecutar el backup con la tecla `B`.
+In every moment the application indicates the controls available for handling. As seen in the previous screen, in this case what we could do is to navigate through the different files with Up/Down, mark or unmark (*toggle*) with the `A` key and finally execute the backup with the `B` key.
 
-Como decíamos antes, el color con que se representa cada fichero tiene un significado. Por ejemplo en el siguiente fragmento vemos los tres colores posibles:
+As we said before, the color with which each file is represented has a meaning. For example, in the following fragment we see the three possible colors:
 
 ![Backup colors](images/backup_colors.png)
 
-El significado de cada color aplicado a estos tres ficheros se interpreta de la siguiente forma:
+The meaning of each color applied to these three files is interpreted as follows:
 
-* Blanco: Se puede hacer backup y restaurar.
-* Rojo: Se puede hacer backup pero no restaurar. Típicamente porque todavía no se ha hecho el primer backup.
-* Gris: No se puede hacer backup ni restaurar. Típicamente porque no existen los ficheros o directorios configurados para este backup, seguramente porque no tenemos instalado el sistema correspondiente en nuestra máquina.
+* White: It can be backed up and restored.
+* Red: It can be backed up but not restored. Typically because the first backup hasn't been done yet.
+* Gray: It cannot be backed up or restored. Typically because the files or directories configured for this backup do not exist, surely because we do not have the corresponding application/emulator installed on our machine.
 
-La marca que aparece a la izquierda de cada fichero de backup sirve para especificar si queremos que dicho fichero forme parte de las operaciones de backup o restauración que ejecutaremos a partir de entonces.
+The mark that appears to the left of each backup file is used to specify if we want that file to be part of the backup or restoration operations that we will execute from then on.
 
-Cuando existan ficheros de backup ya realizados (color blanco) y alguno de éstos se encuentre marcado (marca a la izqierda), veremos que aparece un nuevo control que nos permite realizar la restauración, la tecla `X` (*restore*). La restauración sólo se realizará de los ficheros de los que exista backup. Por ejemplo en la siguiente configuracion, si ejecutamos una restauración de los backups, sólo se restaurará el primer fichero (`Stella (A2600)` que aparece en blanco) y no el del segundo (`FBA` que aparece en rojo) a pesar de que ambos están marcados para ser ejecutados:
+When there are backup files already made (white color) and one of them is marked (mark on the left), we will see that a new control appears that allows us to perform the restoration, the `X` key (*restore*). The restoration will only be carried out on the files for which there is backup. For example, in the following configuration, if we execute a restoration of the backups, only the first file will be restored (`Stella (A2600)` that appears in white) and not the second (`FBA` that appears in red) despite that both are marked to be executed:
 
 ![Selective backup](images/selective_backup.png)
 
-La ejecución del backup sí se realizará sobre los dos ficheros, y de hecho al finalizar, el segundo pasará a tomar color blanco al permitir ya la restauración:
+The execution of the backup will be carried out on the two files, and in fact at the end, the second one will turn white, allowing the restoration:
 
 ![Backup done](images/backup_done.png)
 
-Podemos comprobar la generación de ambos backups (en realidad la repetición del primero y la creación del segundo) si exploramos los ficheros que existen en el directorio donde se dejan los backups (si no se modifica la configuración será `/media/sdcard/backups`):
+We can check the generation of both backups (actually the repetition of the first and the creation of the second) if we explore the files that exist in the directory where the backups are left (if the configuration is not modified it will be `/media/sdcard/backups`):
 
 ![Check backup](images/check_backup.png)
 
-Al ejecutar las operaciones de backup y restauración se nos pedirá confirmación por medio de un pequeño popup:
+When executing the backup and restoration operations, we will be asked for confirmation by means of a small popup:
 
 ![Confirm backup](images/confirm_backup.png)
 
-Por último, una vez confirmada la operación podremos ver el progreso del backup o la restauración, indicándose los ficheros de backup realizados o restaurados. Al realizar el primer backup observaremos además cómo cambia la coloración de rojo a blanco, indicando la aparición de los ficheros de backup que permiten la restauración a partir de entonces (al principio del video se desactiva el backup de PCSX4All por tardar demasiado para el propósito del vídeo):
+Finally, once the operation is confirmed, we can see the progress of the backup or restoration, indicating the backup files made or restored. When making the first backup, we will also observe how the color changes from red to white, indicating the creation of the backup files that allow restoration from then on (at the beginning of the video, the PCSX4All backup is deactivated because it takes too long for the purpose of the video):
 
-<iframe width="640" height="480" src="https://www.youtube.com/embed/pDfXigJ-QiI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![See video](https://img.youtube.com/vi/pDfXigJ-QiI/hqdefault.jpg)](https://www.youtube.com/watch?v=pDfXigJ-QiI "See video")
 
-La aplicación puede ser cerrada en cualquier momento pulsando la tecla `START`.
+The application can be closed at any time by pressing the `START` key.
