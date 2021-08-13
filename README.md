@@ -2,7 +2,7 @@
 
 # Py Backup
 
-Py Backup is a application that will facilitate the management of backups on the RG350 and RG280 consoles. It is designed mainly to back up the directories where the savestates of the emulators are stored, but by modifying its configuration file we can use it to make a backup/restore of any file or directory on the console.
+Py Backup is an application that will facilitate the management of backups on the RG350 and RG280 consoles. It is designed mainly to back up the directories where the savestates of the emulators are stored, but by modifying its configuration file we can use it to make a backup/restore of any file or directory on the console.
 
 ## Installation
 
