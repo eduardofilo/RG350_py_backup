@@ -15,7 +15,7 @@ SYSTEM_HEIGHT = 13
 N_SYSTEMS_FIT = math.trunc(SYSTEMS_HEIGHT / SYSTEM_HEIGHT)
 
 def draw_check(surface, pos=(0,0), status=False, available=False):
-    color = TEXT_COLOR if available else UNAVAILABLE_COLOR
+    color = TEXT_COLOR
     pygame.draw.lines(surface, color, False, [(pos[0], pos[1]), (pos[0], pos[1]+8), (pos[0]+8, pos[1]+8), (pos[0]+8, pos[1]), (pos[0], pos[1])])
     if status:
         pygame.draw.line(surface, color, (pos[0], pos[1]), (pos[0]+8, pos[1]+8))

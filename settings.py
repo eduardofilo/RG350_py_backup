@@ -43,7 +43,7 @@ def n_systems_enabled():
     return len(list(systems_enabled))
 
 def n_backups_available():
-    backups_available = filter(lambda system : system['source_available'] and system['enabled'] and system['backup_available'], config)
+    backups_available = filter(lambda system : system['enabled'] and system['backup_available'], config)
     return len(list(backups_available))
 
 def update_backup_available():
@@ -62,7 +62,7 @@ def next_backup_system(first):
 def next_restore_system(first):
     next_system = -1
     for n in range(first, len(config)):
-        if config[n]['source_available'] and config[n]['enabled'] and config[n]['backup_available']:
+        if config[n]['enabled'] and config[n]['backup_available']:
             return n
 
     return next_system
