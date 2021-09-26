@@ -29,11 +29,8 @@ while running:
     events = pygame.event.get()
     for event in events:
         dirty = True
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT or (event.type == pygame.KEYUP and event.key == keys.RG350_BUTTON_START):
             running = False
-        if event.type == pygame.KEYUP:
-            if event.key == keys.RG350_BUTTON_START:
-                running = False
 
     app.handle_events(events)
 
@@ -53,10 +50,6 @@ while running:
         app.do_restore(settings.system)
 
     dt = clock.tick(settings.FPS)
-
-# Save changes in config
-if settings.status in [0, 4, 5, 6, 7]:
-    config.save()
 
 pygame.quit()
 sys.exit()
